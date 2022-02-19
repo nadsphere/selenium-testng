@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="tests.AddQuoteTestPageObj" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-02-19T05:20:42" hostname="LAPTOP-1VA8C4KD" time="7.336">
-  <properties/>
-  <testcase name="addQuoteWithColorYellow" classname="tests.AddQuoteTestPageObj" time="7.336"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
