@@ -41,12 +41,12 @@ public class AddQuoteTestPageObj {
     public void addQuoteWithColorYellow() throws Exception {
         QuoteHomePage homePage = new QuoteHomePage(driver);
         homePage.openPage();
-        homePage.inputQuote("Lorem Ipsum heheheh");
+        homePage.inputQuote("Lorem Ipsum");
         Thread.sleep(3000);
         homePage.selectColor("Yellow");
         Thread.sleep(3000);
         homePage.clickButtonAddQuote();
         String actualData = homePage.getSecondQuote();
-        Assert.assertEquals(actualData, "Lorem Ipsum heheheh");
+        Assert.assertEquals(actualData, "Lorem Ipsum");
     }
 }
