@@ -1,52 +1,77 @@
 package tests;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.support.ui.Select;
+import com.aventstack.extentreports.Status;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import pages.QuoteHomePage;
+import utils.ConfigReader;
+import utils.ExtentReportManager;
 
-import java.util.List;
+public class AddQuoteTestPageObj extends BaseTest {
 
-public class AddQuoteTestPageObj {
-    private ChromeDriver driver;
-
-    @BeforeTest
-    public void initializeSession() {
-//        wedrivermanager
-        WebDriverManager.chromedriver().setup();
-//        chrome options
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--incognito");
-//        init browser
-        driver = new ChromeDriver(options);
-//        maximize window
-        driver.manage().window().maximize();
-    }
-
-    @AfterTest
-    public void destroySession() throws InterruptedException {
-        Thread.sleep(5000);
-//        close browser
-        driver.quit();
-    }
-
-    @Test
-    public void addQuoteWithColorYellow() throws Exception {
+    @Test(description = "Add a quote with Yellow color and verify it appears")
+    public void addQuoteWithColorYellow() {
         QuoteHomePage homePage = new QuoteHomePage(driver);
-        homePage.openPage();
-        homePage.inputQuote("Lorem Ipsum");
-        Thread.sleep(3000);
-        homePage.selectColor("Yellow");
-        Thread.sleep(3000);
-        homePage.clickButtonAddQuote();
-        String actualData = homePage.getSecondQuote();
-        Assert.assertEquals(actualData, "Lorem Ipsum");
+
+        logInfo("Opening application");
+        homePage.openPage(ConfigReader.getAppUrl());
+
+        int initialCount = homePage.getQuoteCount();
+        logInfo("Initial quote count: " + initialCount);
+
+        logInfo("Adding new quote with Yellow color");
+        homePage.addQuoteWithColor("Selenium TestNG Demo Quote", "Yellow");
+
+        int finalCount = homePage.getQuoteCount();
+        logInfo("Final quote count: " + finalCount);
+
+        String quoteText = homePage.getQuoteText(finalCount - 1);
+        Assert.assertEquals(quoteText, "Selenium TestNG Demo Quote", "Quote text mismatch");
+        Assert.assertEquals(finalCount, initialCount + 1, "Quote count should increase by 1");
+
+        logPass("Quote added successfully with Yellow color");
+    }
+
+    @Test(description = "Add multiple quotes with different colors")
+    public void addMultipleQuotes() {
+        QuoteHomePage homePage = new QuoteHomePage(driver);
+
+        logInfo("Opening application");
+        homePage.openPage(ConfigReader.getAppUrl());
+
+        String[][] quotes = {
+                {"First Quote - Red", "Red"},
+                {"Second Quote - Blue", "Blue"},
+                {"Third Quote - Green", "Green"}
+        };
+
+        for (String[] quoteData : quotes) {
+            logInfo("Adding: " + quoteData[0]);
+            homePage.addQuoteWithColor(quoteData[0], quoteData[1]);
+        }
+
+        int finalCount = homePage.getQuoteCount();
+        Assert.assertTrue(finalCount >= 3, "Should have at least 3 quotes");
+
+        logPass("Multiple quotes added successfully");
+    }
+
+    @Test(description = "Verify quote persistence after page refresh")
+    public void verifyQuotePersistence() {
+        QuoteHomePage homePage = new QuoteHomePage(driver);
+
+        logInfo("Opening application");
+        homePage.openPage(ConfigReader.getAppUrl());
+
+        String testQuote = "Persistent Quote Test";
+        homePage.addQuoteWithColor(testQuote, "Yellow");
+
+        logInfo("Refreshing page to verify persistence");
+        driver.navigate().refresh();
+
+        boolean isDisplayed = homePage.isQuoteDisplayed(testQuote);
+        Assert.assertTrue(isDisplayed, "Quote should persist after page refresh");
+
+        logPass("Quote persistence verified");
     }
 }

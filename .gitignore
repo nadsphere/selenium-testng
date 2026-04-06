@@ -1,4 +1,48 @@
-.idea
+# IDE
+.idea/
 *.iml
-.gradle
-build
+*.iws
+*.ipr
+.idea_modules/
+
+# Gradle
+.gradle/
+build/
+gradle/wrapper/gradle-wrapper.jar
+
+# Java
+*.class
+*.jar
+*.war
+*.ear
+target/
+
+# WebDriver downloads
+driver/
+drivers/
+webdriver/
+webdrivers/
+**/chromedriver*
+**/geckodriver*
+**/msedgedriver*
+
+# Test reports
+reports/
+test-output/
+**/test-output/
+
+# Logs
+*.log
+logs/
+
+# OS
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# CI/CD
+.github/
+
+# Config with secrets (uncomment if needed)
+# config.properties

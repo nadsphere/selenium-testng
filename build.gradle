@@ -9,10 +9,25 @@ repositories {
     mavenCentral()
 }
 
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
 dependencies {
-    testImplementation group: 'org.testng', name: 'testng', version: '7.5'
-    implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '4.1.2'
-    implementation group: 'io.github.bonigarcia', name: 'webdrivermanager', version: '5.1.0'
+    // TestNG - latest stable
+    testImplementation 'org.testng:testng:7.11.0'
+
+    // Selenium WebDriver - latest stable
+    implementation 'org.seleniumhq.selenium:selenium-java:4.33.0'
+
+    // WebDriverManager - latest stable
+    implementation 'io.github.bonigarcia:webdrivermanager:6.1.0'
+
+    // ExtentReports - latest stable
+    implementation 'com.aventstack:extentreports:5.1.2'
+
+    // JSON for test data management
+    implementation 'com.google.code.gson:gson:2.13.1'
 }
 
 test {
