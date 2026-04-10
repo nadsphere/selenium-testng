@@ -15,19 +15,19 @@ tasks.withType(JavaCompile) {
 
 dependencies {
     // TestNG - latest stable
-    testImplementation 'org.testng:testng:7.11.0'
+    testImplementation 'org.testng:testng:7.12.0'
 
     // Selenium WebDriver - latest stable
-    implementation 'org.seleniumhq.selenium:selenium-java:4.33.0'
+    implementation 'org.seleniumhq.selenium:selenium-java:4.43.0'
 
     // WebDriverManager - latest stable
-    implementation 'io.github.bonigarcia:webdrivermanager:6.1.0'
+    implementation 'io.github.bonigarcia:webdrivermanager:6.3.4'
 
     // ExtentReports - latest stable
     implementation 'com.aventstack:extentreports:5.1.2'
 
     // JSON for test data management
-    implementation 'com.google.code.gson:gson:2.13.1'
+    implementation 'com.google.code.gson:gson:2.13.2'
 }
 
 test {
