@@ -41,8 +41,8 @@ Thumbs.db
 ehthumbs.db
 Desktop.ini
 
-# CI/CD (keep workflows directory tracked)
-!.github/workflows/
+# CI/CD
+.github/
 
 # Config with secrets (uncomment if needed)
 # config.properties
